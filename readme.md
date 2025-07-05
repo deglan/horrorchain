@@ -10,29 +10,13 @@ An experimental 2D top-down psychological horror game that teaches the fundament
 
 ## 📁 Project Structure
 
-├── assets/ → Game assets (graphics, audio, fonts)
-│ ├── player/ → Player sprites
-│ ├── tileset/ → Environment tiles (map blocks)
-│ ├── audio/ → Ambient and sound effects
-│ └── fonts/ → Pixel or glitch fonts
-│
-├── constants/ → Constants
-│
-├── blocks/ → Blockchain logic and data structures
-│ ├── block.go → Block struct (index, hash, data…)
-│ └── chain.go → Blockchain validation, linking
-│
-├── scenes/ → Game scenes (start screen, gameplay)
-│ ├── start.go → Start / intro screen
-│ └── game.go → Main game logic
-│
-├── engine/ → Core engine: input, movement, rendering
-│ ├── player.go → Player controller
-│ └── map.go → Map renderer and loader
-│
-├── main.go → Main game loop and entry point
-└── Makefile → Common tasks: run, build, lint, clean
-
+assets/ Graphics, audio, fonts, and maps
+blocks/ Core blockchain logic (block struct, validation)
+constants/  Game-wide constants (tile size, speeds, etc.)
+engine/ Core engine systems
+scenes/ Game states: start, pause, game over, etc.
+main.go Entry point and scene switching
+makefile Dev shortcuts (build, run, clean, etc.)
 
 ---
 
