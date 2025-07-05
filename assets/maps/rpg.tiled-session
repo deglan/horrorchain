@@ -1,0 +1,86 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "firstRoom.json",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "Wszystkie pliki (*)",
+    "fileStates": {
+        "firstRoom.json": {
+            "scale": 3,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 161.16666666666663,
+                "y": 131
+            }
+        },
+        "spawn.json": {
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 800.5,
+                "y": 640
+            }
+        },
+        "tilesets/DungeonFloor.json": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tilesets/TilesetFloor.json": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 4
+        },
+        "tilesets/TilesetFloor.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 4
+        },
+        "tilesets/atlas_floor.json": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        },
+        "tilesets/buildings.json": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.25,
+            "scaleInEditor": 1
+        },
+        "tilesets/walls.json": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        }
+    },
+    "last.externalTilesetPath": "C:/dev/go/rpg-in-golang/assets/maps/tilesets",
+    "last.imagePath": "C:/Users/Jakub/Documents/kurs/golang/horrorchain/assets/images",
+    "map.height": 15,
+    "map.lastUsedFormat": "json",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 20,
+    "openFiles": [
+        "tilesets/buildings.json",
+        "firstRoom.json",
+        "tilesets/walls.json"
+    ],
+    "project": "rpg.tiled-project",
+    "recentFiles": [
+        "firstRoom.json",
+        "tilesets/buildings.json",
+        "tilesets/walls.json",
+        "spawn.json",
+        "tilesets/atlas_floor.json",
+        "tilesets/DungeonFloor.json",
+        "tilesets/TilesetFloor.json",
+        "tilesets/TilesetFloor.tsx"
+    ],
+    "tileset.lastUsedFormat": "json",
+    "tileset.tileSize": {
+        "height": 32,
+        "width": 16
+    },
+    "tileset.type": 0
+}
