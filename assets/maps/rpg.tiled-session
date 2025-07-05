@@ -9,11 +9,11 @@
     "file.lastUsedOpenFilter": "Wszystkie pliki (*)",
     "fileStates": {
         "firstRoom.json": {
-            "scale": 3,
+            "scale": 3.5308333333333333,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 161.16666666666663,
-                "y": 131
+                "x": 159.8772716544725,
+                "y": 120.08496577767288
             }
         },
         "spawn.json": {

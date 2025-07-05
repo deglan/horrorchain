@@ -1,6 +1,7 @@
 package systems
 
 import (
+	"fmt"
 	"image"
 	"image/color"
 
@@ -31,12 +32,17 @@ func DrawTileLayers(screen *ebiten.Image, tilemapJSON *tile.TilemapJSON, tileset
 				}
 			}
 			if img == nil {
-				continue // no matching tileset
+				continue
 			}
 
 			opts := ebiten.DrawImageOptions{}
-			opts.GeoM.Translate(float64(x), float64(y)-float64(img.Bounds().Dy())+constants.Tilesize)
+			imgHeight := img.Bounds().Dy()
+			tileOffsetY := constants.Tilesize - imgHeight
+			opts.GeoM.Translate(float64(x), float64(y+tileOffsetY))
+
 			opts.GeoM.Translate(cameraX, cameraY)
+
+			fmt.Printf("Layer: %s, TileID: %d, Using tileset: %T\n", layer.Name, id, tilemapJSON.Tilesets)
 
 			screen.DrawImage(img, &opts)
 		}
@@ -119,7 +125,7 @@ func DrawColliders(screen *ebiten.Image, colliders []image.Rectangle, cameraX, c
 			float32(collider.Min.Y)+float32(cameraY),
 			float32(collider.Dx()),
 			float32(collider.Dy()),
-			1.0, color.White, true,
+			1.0, color.NRGBA{0, 0, 0, 0}, true,
 		)
 	}
 }

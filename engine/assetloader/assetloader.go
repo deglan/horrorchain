@@ -2,6 +2,7 @@ package assetloader
 
 import (
 	"log"
+	"math/rand"
 
 	"github.com/deglan/horrorchain/engine/animations"
 	"github.com/deglan/horrorchain/engine/components"
@@ -51,26 +52,35 @@ func LoadPlayer(img *ebiten.Image) *entities.Player {
 }
 
 func LoadEnemies(img *ebiten.Image) []*entities.Enemy {
-	return []*entities.Enemy{
-		{
+
+	numEnemies := rand.Intn(6) + 1
+
+	var enemies []*entities.Enemy
+
+	for i := 0; i < numEnemies; i++ {
+		x := float64(rand.Intn(200) + 50)
+		y := float64(rand.Intn(200) + 50)
+
+		hp := rand.Intn(3) + 1
+		damage := rand.Intn(3) + 1
+		cooldown := rand.Intn(50) + 30
+
+		follows := true
+
+		enemy := &entities.Enemy{
 			Sprite: &entities.Sprite{
 				Img: img,
-				X:   100.0,
-				Y:   100.0,
+				X:   x,
+				Y:   y,
 			},
-			FollowsPlayer: true,
-			CombatComp:    components.NewEnemyCombat(3, 1, 30),
-		},
-		{
-			Sprite: &entities.Sprite{
-				Img: img,
-				X:   150.0,
-				Y:   50.0,
-			},
-			FollowsPlayer: true,
-			CombatComp:    components.NewEnemyCombat(3, 1, 30),
-		},
+			FollowsPlayer: follows,
+			CombatComp:    components.NewEnemyCombat(hp, damage, cooldown),
+		}
+
+		enemies = append(enemies, enemy)
 	}
+
+	return enemies
 }
 
 func LoadPotions(img *ebiten.Image) []*entities.Potion {
@@ -87,7 +97,7 @@ func LoadPotions(img *ebiten.Image) []*entities.Potion {
 }
 
 func DrawHearts(screen *ebiten.Image, img *ebiten.Image, anim *animations.Animation, hp int) {
-	for i := 0; i < hp; i++ {
+	for i := range hp {
 		opts := &ebiten.DrawImageOptions{}
 		opts.GeoM.Translate(float64(16*i), 16) // lewy górny róg, z odstępem
 

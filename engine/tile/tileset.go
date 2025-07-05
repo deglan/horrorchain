@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/deglan/horrorchain/constants"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
@@ -20,13 +19,17 @@ type Tileset interface {
 
 // the tileset data deserialized from a standard, single-image tileset
 type UniformTilesetJSON struct {
-	Path string `json:"image"`
+	Path       string `json:"image"`
+	TileWidth  int    `json:"tilewidth"`
+	TileHeight int    `json:"tileheight"`
 }
 
 // the front-facing tileset object used for single-image tilesets
 type UniformTileset struct {
-	img *ebiten.Image
-	gid int
+	img        *ebiten.Image
+	gid        int
+	tileWidth  int
+	tileHeight int
 }
 
 //TODO make dinamic tileset
@@ -34,17 +37,13 @@ type UniformTileset struct {
 func (u *UniformTileset) Img(id int) *ebiten.Image {
 	id -= u.gid
 
-	tilesPerRow := u.img.Bounds().Dx() / constants.Tilesize
-	srcX := id % tilesPerRow
-	srcY := id / tilesPerRow
-
-	// convert the src tile pos to pixel src position
-	srcX *= constants.Tilesize
-	srcY *= constants.Tilesize
+	tilesPerRow := u.img.Bounds().Dx() / u.tileWidth
+	srcX := (id % tilesPerRow) * u.tileWidth
+	srcY := (id / tilesPerRow) * u.tileHeight
 
 	return u.img.SubImage(
 		image.Rect(
-			srcX, srcY, srcX+constants.Tilesize, srcY+constants.Tilesize,
+			srcX, srcY, srcX+u.tileWidth, srcY+u.tileHeight,
 		),
 	).(*ebiten.Image)
 }
@@ -73,8 +72,8 @@ func (d *DynTileset) Img(id int) *ebiten.Image {
 
 func (u *UniformTileset) Contains(id int) bool {
 	id -= u.gid
-	tilesPerRow := u.img.Bounds().Dx() / constants.Tilesize
-	tilesPerCol := u.img.Bounds().Dy() / constants.Tilesize
+	tilesPerRow := u.img.Bounds().Dx() / u.tileWidth
+	tilesPerCol := u.img.Bounds().Dy() / u.tileHeight
 	return id >= 0 && id < tilesPerRow*tilesPerCol
 }
 
@@ -131,8 +130,6 @@ func NewTileset(path string, gid int) (Tileset, error) {
 		return nil, err
 	}
 
-	uniformTileset := UniformTileset{}
-
 	// convert tileset relative path to root relative path
 	tileJSONPath := uniformTilesetJSON.Path
 	tileJSONPath = filepath.Clean(tileJSONPath)
@@ -145,8 +142,13 @@ func NewTileset(path string, gid int) (Tileset, error) {
 	if err != nil {
 		return nil, err
 	}
-	uniformTileset.img = img
-	uniformTileset.gid = gid
+
+	uniformTileset := UniformTileset{
+		img:        img,
+		gid:        gid,
+		tileWidth:  uniformTilesetJSON.TileWidth,
+		tileHeight: uniformTilesetJSON.TileHeight,
+	}
 
 	return &uniformTileset, nil
 }
