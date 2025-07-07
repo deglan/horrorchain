@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/deglan/horrorchain/engine/assetloader"
 	"github.com/deglan/horrorchain/scenes"
 	"github.com/hajimehoshi/ebiten/v2"
 )
@@ -8,20 +9,27 @@ import (
 type Game struct {
 	sceneMap      map[scenes.SceneId]scenes.Scene
 	activeSceneId scenes.SceneId
+	audioManager  *assetloader.AudioManager
 }
 
 func NewGame() *Game {
+	audioManager := assetloader.NewAudioManager()
+	err := audioManager.LoadSound("attack", "assets/sounds/effects/attack_effect.wav")
+	if err != nil {
+		panic(err)
+	}
 	sceneMap := map[scenes.SceneId]scenes.Scene{
-		scenes.GameSceneId:     scenes.NewGameScene(),
-		scenes.StartSceneId:    scenes.NewStartScene(),
-		scenes.PauseSceneId:    scenes.NewPauseScene(),
-		scenes.GameOverSceneId: scenes.NewGameOverScene(),
+		scenes.GameSceneId:     scenes.NewGameScene(audioManager),
+		scenes.StartSceneId:    scenes.NewStartScene(audioManager),
+		scenes.PauseSceneId:    scenes.NewPauseScene(audioManager),
+		scenes.GameOverSceneId: scenes.NewGameOverScene(audioManager),
 	}
 	activeSceneId := scenes.StartSceneId
 	sceneMap[activeSceneId].FirstLoad()
 	return &Game{
 		sceneMap,
 		activeSceneId,
+		audioManager,
 	}
 }
 

@@ -3,17 +3,20 @@ package scenes
 import (
 	"image/color"
 
+	"github.com/deglan/horrorchain/engine/assetloader"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 )
 
 type GameOverScene struct {
 	loaded bool
+	am     *assetloader.AudioManager
 }
 
-func NewGameOverScene() *GameOverScene {
+func NewGameOverScene(am *assetloader.AudioManager) *GameOverScene {
 	return &GameOverScene{
 		loaded: false,
+		am:     am,
 	}
 }
 
@@ -22,7 +25,7 @@ func (s *GameOverScene) Draw(screen *ebiten.Image) {
 	screen.Fill(color.Black)
 	msg := "Game Over!"
 
-	width, height := text.Measure(msg, DefaultFontFace, 4)
+	width, height := text.Measure(msg, assetloader.DefaultFontFace, 4)
 
 	screenW, screenH := 320, 240
 
@@ -33,12 +36,12 @@ func (s *GameOverScene) Draw(screen *ebiten.Image) {
 	opts.GeoM.Translate(x, y)
 	opts.ColorScale.ScaleWithColor(color.White)
 
-	text.Draw(screen, msg, DefaultFontFace, opts)
+	text.Draw(screen, msg, assetloader.DefaultFontFace, opts)
 }
 
 func (s *GameOverScene) FirstLoad() {
-	if DefaultFontFace == nil {
-		LoadFont()
+	if assetloader.DefaultFontFace == nil {
+		assetloader.LoadFont()
 	}
 	s.loaded = true
 }

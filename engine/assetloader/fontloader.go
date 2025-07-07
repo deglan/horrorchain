@@ -1,4 +1,4 @@
-package scenes
+package assetloader
 
 import (
 	"log"

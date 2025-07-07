@@ -9,11 +9,11 @@
     "file.lastUsedOpenFilter": "Wszystkie pliki (*)",
     "fileStates": {
         "firstRoom.json": {
-            "scale": 3.5308333333333333,
+            "scale": 3,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 159.8772716544725,
-                "y": 120.08496577767288
+                "x": 172.5,
+                "y": 131.66666666666663
             }
         },
         "spawn.json": {
@@ -40,7 +40,7 @@
         },
         "tilesets/atlas_floor.json": {
             "dynamicWrapping": false,
-            "scaleInDock": 1.5,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         },
         "tilesets/buildings.json": {
@@ -50,7 +50,7 @@
         },
         "tilesets/walls.json": {
             "dynamicWrapping": false,
-            "scaleInDock": 1.5,
+            "scaleInDock": 1,
             "scaleInEditor": 1
         }
     },
@@ -63,14 +63,14 @@
     "map.width": 20,
     "openFiles": [
         "tilesets/buildings.json",
-        "firstRoom.json",
-        "tilesets/walls.json"
+        "tilesets/walls.json",
+        "firstRoom.json"
     ],
     "project": "rpg.tiled-project",
     "recentFiles": [
-        "firstRoom.json",
         "tilesets/buildings.json",
         "tilesets/walls.json",
+        "firstRoom.json",
         "spawn.json",
         "tilesets/atlas_floor.json",
         "tilesets/DungeonFloor.json",

@@ -3,6 +3,7 @@ package scenes
 import (
 	"image/color"
 
+	"github.com/deglan/horrorchain/engine/assetloader"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
@@ -10,11 +11,13 @@ import (
 
 type StartScene struct {
 	loaded bool
+	am     *assetloader.AudioManager
 }
 
-func NewStartScene() *StartScene {
+func NewStartScene(am *assetloader.AudioManager) *StartScene {
 	return &StartScene{
 		loaded: false,
+		am:     am,
 	}
 }
 

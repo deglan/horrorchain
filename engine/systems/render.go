@@ -1,7 +1,6 @@
 package systems
 
 import (
-	"fmt"
 	"image"
 	"image/color"
 
@@ -41,8 +40,6 @@ func DrawTileLayers(screen *ebiten.Image, tilemapJSON *tile.TilemapJSON, tileset
 			opts.GeoM.Translate(float64(x), float64(y+tileOffsetY))
 
 			opts.GeoM.Translate(cameraX, cameraY)
-
-			fmt.Printf("Layer: %s, TileID: %d, Using tileset: %T\n", layer.Name, id, tilemapJSON.Tilesets)
 
 			screen.DrawImage(img, &opts)
 		}

@@ -40,7 +40,6 @@ func LoadPlayer(img *ebiten.Image) *entities.Player {
 			X:   50.0,
 			Y:   50.0,
 		},
-		Health: 9,
 		Animations: map[entities.PlayerState]*animations.Animation{
 			entities.Up:    animations.NewAnimation(5, 13, 4, 20.0, 1.0),
 			entities.Down:  animations.NewAnimation(4, 12, 4, 20.0, 1.0),
@@ -99,7 +98,7 @@ func LoadPotions(img *ebiten.Image) []*entities.Potion {
 func DrawHearts(screen *ebiten.Image, img *ebiten.Image, anim *animations.Animation, hp int) {
 	for i := range hp {
 		opts := &ebiten.DrawImageOptions{}
-		opts.GeoM.Translate(float64(16*i), 16) // lewy górny róg, z odstępem
+		opts.GeoM.Translate(float64(16*i), 16)
 
 		frame := anim.Frame()
 		screen.DrawImage(

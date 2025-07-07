@@ -27,6 +27,11 @@ func (b *BasicCombat) Health() int {
 	return b.health
 }
 
+func (b *BasicCombat) HealthUpdate(potion uint) int {
+	b.health += int(potion)
+	return b.health
+}
+
 func (b *BasicCombat) Attacking() bool {
 	return b.attacking
 }

@@ -31,9 +31,10 @@ type GameScene struct {
 	attackAnimations  []*animations.AttackAnimation
 	healthImg         *ebiten.Image
 	healthAnim        *animations.Animation
+	am                *assetloader.AudioManager
 }
 
-func NewGameScene() *GameScene {
+func NewGameScene(am *assetloader.AudioManager) *GameScene {
 	return &GameScene{
 		player:            nil,
 		playerSpriteSheet: nil,
@@ -48,6 +49,7 @@ func NewGameScene() *GameScene {
 		attackAnimations:  make([]*animations.AttackAnimation, 0),
 		healthImg:         nil,
 		healthAnim:        nil,
+		am:                am,
 	}
 }
 
@@ -121,13 +123,14 @@ func (g *GameScene) Update() SceneId {
 
 	if inpututil.IsMouseButtonJustPressed(ebiten.MouseButton0) {
 		if anim := systems.CreateAttackAnimation(g.player, g.camera); anim != nil {
+			g.am.PlayWithVolume("attack", 0.1)
 			g.attackAnimations = append(g.attackAnimations, anim)
 		}
 	}
 
 	g.enemies = systems.HandleCombat(g.player, g.enemies, g.attackAnimations, g.colliders)
 	systems.UpdatePlayerAnimation(g.player)
-	systems.CollectPotions(g.player, g.potions)
+	g.potions = systems.CollectPotions(g.player, g.potions)
 
 	g.camera.FollowTarget(g.player.X, g.player.Y, constants.WindowSizeWidth, constants.WindowSizeHeight)
 	g.camera.Constrain(
